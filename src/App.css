@@ -657,9 +657,6 @@ body{
   align-items: center;
   gap: 5rem;
 }
-.footer-nav-links img{
-  background-color: white;
-}
 
 .footer-nav-list {
   display: flex;

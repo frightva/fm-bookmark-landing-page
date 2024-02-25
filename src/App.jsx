@@ -1,5 +1,6 @@
 import './App.css';
 import logo from './images/logo-bookmark.svg'
+import logoWhite from './images/logo-bookmarik-white.svg'
 import iconHambuger from './images/icon-hamburger.svg'
 import iconClose from './images/icon-close.svg'
 import iconArrow from './images/icon-arrow.svg'
@@ -89,7 +90,11 @@ function App() {
         <div className="container">
           <div className='nav-wrapper'>
             <a href="/">
+              {!menu ? 
               <img className='logo' src={logo} alt="" />
+              : 
+              <img className='logo' src={logoWhite} alt="" />
+              }
             </a>
             <button 
               aria-controls='primary-navigation'
@@ -292,7 +297,7 @@ function App() {
         <div className="container">
           <div className="nav-wrapper-footer">
             <div className='footer-nav-links'>
-              <a href=""><img src={logo} alt="" /></a>
+              <a href=""><img src={logoWhite} alt="" /></a>
               <nav className='secondary-navigation'>
                 <ul role="list" className='footer-nav-list'>
                   <li><a className='hover-red' href="/">FEATURES</a></li>
