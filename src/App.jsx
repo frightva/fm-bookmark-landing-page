@@ -3,6 +3,7 @@ import logo from './images/logo-bookmark.svg'
 import iconHambuger from './images/icon-hamburger.svg'
 import iconClose from './images/icon-close.svg'
 import iconArrow from './images/icon-arrow.svg'
+import iconError from './images/icon-error.svg'
 import iconChrome from './images/logo-chrome.svg'
 import iconFirefox from './images/logo-firefox.svg'
 import iconOpera from './images/logo-opera.svg'
@@ -16,6 +17,63 @@ import { useState } from 'react';
 
 function App() {
   const [menu, setMenu] = useState(false)
+  const [feature, setfeature] = useState('f1')
+  const [faq, setFaq] = useState('')
+  const [c, setC] = useState(false)
+  const [emailTerm, setEmailTerm] = useState('')
+
+  const [email, setEmail] = useState(1)
+
+  const handleEmail = (e) => {
+    e.preventDefault()
+
+      // don't remember from where i copied this code, but this works.
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    
+      if ( re.test(emailTerm) ) {
+        // this is a valid email address
+      // call setState({email: email}) to update the email
+      // or update the data in redux store.
+      console.log('wrokd')
+      setEmail(true)
+    }
+    else {
+      console.log('eror')
+      // invalid email, maybe show an error to the user.
+      setEmail(false)
+    }
+  }
+
+  const DATA_ARRAY = [
+    {
+      id: 'f1',
+      faqId: 'faq1',
+      imgIlu: featureTab1,
+      title: 'What is Bookmark?',
+      faqText: 'F1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
+    },
+    {
+      id: 'f2',
+      faqId: 'faq2',
+      imgIlu: featureTab2,
+      title: 'How can i request a new browser',
+      faqText: 'F2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
+    },
+    {
+      id: 'f3',
+      faqId: 'faq3',
+      imgIlu: featureTab3,
+      title: 'Is there a mobile app?',
+      faqText: 'F3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
+    },
+    {
+      id: 'f4',
+      faqId: 'faq4',
+      imgIlu: 'N/A',
+      title: 'What about other Chromium browsers',
+      faqText: 'F4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
+    },
+  ]
 
   const handleMenu = () => {
     const primaryNav = document.querySelector('.primary-navigation')
@@ -23,6 +81,7 @@ function App() {
     setMenu(!menu)
   
   }
+
   return (
     <>
     <header className='primary-header'>
@@ -58,7 +117,7 @@ function App() {
     </header>
 
 
-    <main>
+    <main style={{'overflow-x': 'hidden'}}>
       <section className='padding-block-900'>
         <div className="container">
           <div className="even-columns">
@@ -89,13 +148,13 @@ function App() {
           </div>
           <div className='feature-links'>
             <ul role='list'>
-              <li className='active'>
+              <li onClick={() => setfeature('f1')} className={feature === 'f1' ? 'active' : ''}>
                 <p className='hover-red'>Simple Bookmarking</p>
               </li>
-              <li>
+              <li onClick={() => setfeature('f2')} className={feature === 'f2' ? 'active' : ''}>
                 <p className='hover-red'>Speedy Searching</p>
               </li>
-              <li>
+              <li onClick={() => setfeature('f3')} className={feature === 'f3' ? 'active' : ''}>
                 <p className='hover-red'>Easy Sharing</p>
               </li>
             </ul>
@@ -107,7 +166,10 @@ function App() {
         <div className="container">
           <div className="even-columns spacer">
             <div className='bookmark-section-img'>
-              <img src={featureTab1} alt="" />
+              {DATA_ARRAY
+              .map((item) => {
+                return item.id === feature && <img key={item.id} src={item.imgIlu} alt="" />
+              })}
             </div>
             <div className='bookmark-section-text'>
               <h2 className='fs-secondary-heading fw-medium text-neutral-400'>Bookmark in one click</h2>
@@ -163,42 +225,24 @@ function App() {
           <p className='text-neutral-300 padding-bottom-700'>Here are some of our FAQs. If you have any other questions you'd like answered please feel free to email us.</p>
           <div className='faq-container'>
             <ul role='list' className='faq-list'>
-              <li>
-                <div className='faq-head'>
-                  <h3 className='hover-red text-neutral-400 fw-regular fs-500'>What is Bookmark?</h3>
-                  <img src={iconArrow} alt="" />
-                </div>
-                <p className='faq-body'>
-                  infos
-                </p>
-              </li>
-              <li>
-                <div className='faq-head'>
-                  <h3 className='hover-red text-neutral-400 fw-regular fs-500'>How can i request a new browser</h3>
-                  <img src={iconArrow} alt="" />
-                </div>
-                <p className='faq-body'>
-                  infos
-                </p>
-              </li>
-              <li>
-                <div className='faq-head'>
-                  <h3 className='hover-red text-neutral-400 fw-regular fs-500'>Is there a mobile app?</h3>
-                  <img src={iconArrow} alt="" />
-                </div>
-                <p className='faq-body'>
-                  infos
-                </p>
-              </li>
-              <li>
-                <div className='faq-head'>
-                  <h3 className='text-neutral-400 fw-regular fs-500 hover-red'>What about other Chromium browsers</h3>
-                  <img src={iconArrow} alt="" />
-                </div>
-                <p className='faq-body'>
-                  infos
-                </p>
-              </li>
+              {DATA_ARRAY
+              .map((item) => {
+                return (
+                <li key={item.faqId} className={faq === item.faqId 
+                  ? 'faq-open'
+                  : 'faq-closed'}
+                onClick={() => setC(!c)}>
+                  <div className='faq-head'>
+                    <h3 className='hover-red text-neutral-400 fw-regular fs-500'
+                    onClick={(e) => setFaq(item.faqId)}>{item.title}</h3>
+                    <img className='arrowImg' src={iconArrow} alt="" />
+                  </div>
+                  <p className='faq-body'>
+                    {item.faqText}
+                  </p>
+                </li>
+                )
+              })}
             </ul>
             <button className="btn">
               More Info
@@ -213,12 +257,28 @@ function App() {
             <div className='cat | spacer'>
               <p className='fs-500 letter-space-400 text-neutral-100'>35,000+ ALREADY JOINED</p>
               <h2 className='fs-secondary-heading text-neutral-100'>Stay uo-to-date with what we're doing</h2>
-              <form className='cat-form'>
-                <input type="email"
-                placeholder='Enter your emial address' />
-                <button className='btn' datatype='bg-red'>
-                  Contact Us
-                </button>
+              <form 
+              onSubmit={(e) => handleEmail(e)}
+              className='cat-form'>
+                <div className={email ? 'email-works' : 'email-error'}>
+                  <div className='input-section' 
+                  style={{'--spacer': '0'}}>
+                    <input
+                    type="email"
+                    placeholder='Enter your emial address'
+                    value={emailTerm}
+                    onChange={(e) => setEmailTerm(e.target.value)} />
+                    <img src={iconError} alt="" />
+                    
+                    <span style={{'--spacer': '0'}}>Whoops, make sure it's an email</span>
+                  </div>
+                  <div  style={{'--spacer': '0'}}>
+                    <button  style={{'--spacer': '0'}} className='btn' datatype='bg-red'>
+                      Contact Us
+                    </button>
+                  </div>
+                </div>
+                
               </form>
             </div>
           </div>

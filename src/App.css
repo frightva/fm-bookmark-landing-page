@@ -414,10 +414,49 @@ body{
 
 .hero-section-text {
   grid-area: text;
- }
- .hero-section-img{
+}
+.hero-section-img{
   grid-area: img;
- }
+  position: relative;
+  z-index: -1;
+}
+
+.hero-section-img::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  width: 100%;
+  height: 85%;
+  background-color: var(--clr-primary-400);
+  border-bottom-left-radius: 8rem;
+  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1rem;
+  z-index: -2;
+}
+.bookmark-section-img{ position: relative;}
+.bookmark-section-img::before{
+  content: "";
+  position: absolute;
+  inset: 25% -15%;
+  width: 100%;
+  height: 95%;
+  background-color: var(--clr-primary-400);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 8rem;
+  border-top-left-radius: 1rem;
+  z-index: -2;
+
+}
+@media (max-width: 50em) {
+  .hero-section-img::before {
+    height: 90%;
+    inset: 15%;
+  }
+  .bookmark-section-img::before {
+    height: 100%;
+    inset: 15% -35%;
+  }
+}
 
 .hero-section-text p{
   max-width: 40ch;
@@ -457,6 +496,7 @@ body{
   width: 100%;
 }
 .feature-links ul li.active {
+  transition: all .2s;
   border-bottom: 3px solid var(--clr-primary-300);
 }
 
@@ -543,8 +583,23 @@ body{
   vertical-align: middle;
 }
 .faq-body{
-  display: none;
+  text-align: start;
+  display: block;
 } 
+
+.faq-open p{
+  transition: all .3s;
+  clip-path: inset(0% 0% 0% 0%);
+}
+.faq-open .arrowImg {
+  transition: all .3s;
+  filter: invert(1);
+  transform: rotate(180deg);
+}
+.faq-closed p {
+  position: absolute;
+  clip-path: inset(0% 0% 100% 0%);
+}
 
 
 .cat h2 {
@@ -558,7 +613,6 @@ body{
   padding: 1.2rem 6rem 1rem 4rem;
   border: none;
   border-radius: 4px;
-  margin-right: 2rem;
 }
 
 
@@ -653,4 +707,70 @@ body{
     margin-top: 1.2rem;
   }  
 
+}
+
+.email-works{
+ border: none;
+ display: flex;
+ justify-content: center;
+}
+.email-works span {
+  display: none;
+}
+.email-works img {
+  display: none;
+}
+
+.input-section {
+  margin-right: 1rem;
+}
+
+.email-error{
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+.email-error .input-section {
+  position: relative;
+  background-color: var(--clr-primary-300);
+  border: 4px solid var(--clr-primary-300);
+  border-radius: 4px;
+  width: auto;
+
+  font-size: var(--fs-300);
+}
+.email-error img {
+  display: block;
+  position: absolute;
+  top: 1rem;
+  left: 90%;
+}
+.email-error span {
+  display: block;
+}
+
+@media (max-width: 50em) {
+  .email-works{
+    border: none;
+    display: block;
+   }
+
+  .email-error{
+    border: none;
+    display: block;
+  }
+
+  .input-section {
+    margin-bottom: 1rem;
+    max-width: 220px;
+    margin-inline: auto;
+  }
+
+  .email-error img {
+    display: block;
+    position: absolute;
+    top: .6rem;
+    left: 11.5rem;
+    width: 18px;
+  }
 }
