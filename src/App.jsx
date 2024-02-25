@@ -48,22 +48,28 @@ function App() {
   const DATA_ARRAY = [
     {
       id: 'f1',
-      faqId: 'faq1',
+      titleF: 'Bookmark in one click',
+      textF: 'Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favourites sites.',
       imgIlu: featureTab1,
+      faqId: 'faq1',
       title: 'What is Bookmark?',
       faqText: 'F1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
     },
     {
       id: 'f2',
-      faqId: 'faq2',
+      titleF: 'Intelligent search',
+      textF: 'Our powerful search feature will help you find saved sites in no time at all. No need to trawl through all of your bookmarks',
       imgIlu: featureTab2,
+      faqId: 'faq2',
       title: 'How can i request a new browser',
       faqText: 'F2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
     },
     {
       id: 'f3',
-      faqId: 'faq3',
+      titleF: 'Share your bookmarks',
+      textF: 'Easily share your bookmarks and collections with others. Create a shareable link that you can send at the click of a button.',
       imgIlu: featureTab3,
+      faqId: 'faq3',
       title: 'Is there a mobile app?',
       faqText: 'F3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate assumenda dicta suscipit magni quam. Itaque perferendis beatae deleniti vero necessitatibus esse vel dicta laborum repellat eaque at omnis, odio nulla.',
     },
@@ -169,23 +175,25 @@ function App() {
 
       <section className='padding-block-800'>
         <div className="container">
-          <div className="even-columns spacer">
-            <div className='bookmark-section-img'>
-              {DATA_ARRAY
-              .map((item) => {
-                return item.id === feature && <img key={item.id} src={item.imgIlu} alt="" />
-              })}
+          {DATA_ARRAY
+          .map((item) => {
+            return item.id === feature && (  
+            <div key={item.id} className="even-columns spacer">
+              <div className='bookmark-section-img'>
+                <img src={item.imgIlu} alt="" />
+              </div>
+              <div className='bookmark-section-text'>
+                <h2 className='fs-secondary-heading fw-medium text-neutral-400'>{item.titleF}</h2>
+                <p className='text-neutral-300'>
+                  {item.textF}
+                </p>
+                <button className='btn'>
+                  More info
+                </button>
+              </div>
             </div>
-            <div className='bookmark-section-text'>
-              <h2 className='fs-secondary-heading fw-medium text-neutral-400'>Bookmark in one click</h2>
-              <p className='text-neutral-300'>
-                Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favourites sites.
-              </p>
-              <button className='btn'>
-                More info
-              </button>
-            </div>
-          </div>
+            )
+          })}
         </div>
       </section>
 
